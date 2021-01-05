@@ -1,1 +1,46 @@
-Hello World
+<html>
+  <body style="margin: 0; background-color: black;">
+    <h2>
+        Breakfast Bingo
+    </h2>
+    <div id="resultlist">
+    
+    </div>
+    <script>
+        var arr = [
+            'test 1',
+            'test 2',
+            ];
+        var html = '';
+
+        var index = 0;
+
+        function shuffle(array) {
+            var currentIndex = array.length,
+                temporaryValue, randomIndex;
+            html += '<table style="width:100%">';
+            while (0 !== currentIndex) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+
+            }
+
+            while (index < array.length) {
+                var nextDiva = array[index + 2] && !array[index + 3] ? array[index + 1] + ', ' + array[index + 2] : array[index + 1];
+                html += '<tr><td>' + array[index] + '</td><td>' + nextDiva + '</td></tr>';
+                index += 2;
+                if (index >= array.length-1) break;
+            }
+
+            html += '</table>'
+        }
+
+        shuffle(arr);
+
+        document.getElementById('resultlist').innerHTML = html;
+    </script>
+  </body>
+</html>
