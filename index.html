@@ -38,7 +38,8 @@
         <script>
             var arr = new Array();
 
-            function addElement() {
+            //fill the Array with Participants
+            function addElement() { 
                 var participantsName = document.getElementById('input').value;
                 if (participantsName) {
                     arr.push(participantsName);
@@ -47,6 +48,7 @@
                 }
             }
 
+            //shuffle the Array
             function shuffle() {
                 var currentIndex = arr.length,
                     temporaryValue, randomIndex, nextDiva;
@@ -73,6 +75,7 @@
                 }
             }
 
+            //list the array
             function displayParticipants(){
                 var str='';
                 var seperator = '';
@@ -91,6 +94,7 @@
                 const newTitle = document.createElement("h2");
                 const newTable = document.createElement("table");
                 newTable.setAttribute("id", "resulttable");
+                newTable.setAttribute("style", "width: 100%;");
                 const newTitleContent = document.createTextNode("Bingo Bingo");
                 newTitle.appendChild(newTitleContent);
                 resultlist.appendChild(newTitle);
@@ -100,12 +104,12 @@
             function addRow (firstParticipant, secondParticipants) {
                 const resulttable = document.getElementById("resulttable");
                 const newRow = resulttable.insertRow(-1);
-                const newFirstCell = newRow.insertCell(0);
-                const newSecondCell = newRow.insertCell(1);
-                const first = document.createTextNode(firstParticipant);
-                const second = document.createTextNode(secondParticipants);
-                newFirstCell.appendChild(first);
-                newSecondCell.appendChild(second);
+                const firstCell = newRow.insertCell(0);
+                const secondCell = newRow.insertCell(1);
+                const firstContent = document.createTextNode(firstParticipant);
+                const secondContent = document.createTextNode(secondParticipants);
+                firstCell.appendChild(firstContent);
+                secondCell.appendChild(secondContent);
             }
             
         </script>
