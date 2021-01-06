@@ -23,6 +23,9 @@
         input[type=button]:hover {
             background-color: #009fe3;
         }
+        table {
+            width: 100%;
+        }
         </style>
     </head>
     <body>
@@ -31,8 +34,8 @@
         </h2>
         <p>Participant:</p>
         <input type="text" id="input">
-        <input type=button class="button" value='Add' onClick='addElement()';>
-        <input type=button class="button" value="Let's go - Bingo" onClick='shuffle()';>
+        <input type=button class="button" value="Add" onClick="addElement()">
+        <input type=button class="button" value="Let's go - Bingo" onClick="shuffle()">
 
         <div id="participantlist"></div>
         <div id="resultlist"></div>
@@ -44,7 +47,7 @@
                 var participantsName = document.getElementById('input').value;
                 if (participantsName) {
                     arr.push(participantsName);
-                    participantsName='';
+                    document.getElementById('input').value= '';
                     displayParticipants();
                 }
             }
@@ -95,7 +98,6 @@
                 const newTitle = document.createElement("h2");
                 const newTable = document.createElement("table");
                 newTable.setAttribute("id", "resulttable");
-                newTable.setAttribute("style", "width: 100%;");
                 const newTitleContent = document.createTextNode("Bingo Bingo");
                 newTitle.appendChild(newTitleContent);
                 resultlist.appendChild(newTitle);
