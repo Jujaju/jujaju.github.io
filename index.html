@@ -1,46 +1,71 @@
 <html>
-  <body style="margin: 0;">
+  <body style="margin: 30px;">
     <h2>
         Breakfast Bingo
     </h2>
-    <div id="resultlist">
-    
-    </div>
+    <p>Participant</p>
+    <input type="text" id="input">
+    <input type=button value='Add' onClick='addElement()';>
+    <input type=button value="Let's go - Bingo" onClick='shuffle()';>
+
+    <div id="participantlist"></div>
+    <div id="resultlist"></div>
     <script>
-        var arr = [
-            'test 1',
-            'test 2',
-            ];
+        var arr = new Array();
         var html = '';
 
-        var index = 0;
-
-        function shuffle(array) {
-            var currentIndex = array.length,
-                temporaryValue, randomIndex;
-            html += '<table style="width:100%">';
-            while (0 !== currentIndex) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-
+        function addElement() {
+            var participantsName = document.getElementById('input').value;
+            if (participantsName) {
+                arr.push(participantsName);
+                participantsName='';
+                displayParticipants();
             }
-
-            while (index < array.length) {
-                var nextDiva = array[index + 2] && !array[index + 3] ? array[index + 1] + ', ' + array[index + 2] : array[index + 1];
-                html += '<tr><td>' + array[index] + '</td><td>' + nextDiva + '</td></tr>';
-                index += 2;
-                if (index >= array.length-1) break;
-            }
-
-            html += '</table>'
         }
 
-        shuffle(arr);
+        function shuffle() {
+            var currentIndex = arr.length,
+                temporaryValue, randomIndex, nextDiva;
+            html = '';
 
-        document.getElementById('resultlist').innerHTML = html;
+            if( currentIndex>1){
+                var index = 0;
+                html += '<h2>Bingo Bingo</h2><table style="width:100%">';
+                while (0 !== currentIndex) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+                    temporaryValue = arr[currentIndex];
+                    arr[currentIndex] = arr[randomIndex];
+                    arr[randomIndex] = temporaryValue;
+
+                }
+
+                while (index < arr.length) {
+                    nextDiva = arr[index + 2] && !arr[index + 3] ? arr[index + 1] + ', ' + arr[index + 2] : arr[index + 1];
+                    html += '<tr><td>' + arr[index] + '</td><td>' + nextDiva + '</td></tr>';
+                    index += 2;
+                    if (index >= arr.length-1) break;
+                }
+
+                html += '</table>'
+
+                document.getElementById('resultlist').innerHTML = html;
+                console.log(html);
+                console.log(arr);
+            }
+        }
+
+        function displayParticipants(){
+            var str='';
+            var seperator = '';
+            for (i=0;i<arr.length;i++) 
+            { 
+                str += seperator + "<br >" + arr[i];
+                seperator = ",";
+            } 
+
+            document.getElementById('participantlist').innerHTML=str;
+        }
     </script>
   </body>
 </html>
