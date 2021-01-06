@@ -37,7 +37,6 @@
         <div id="resultlist"></div>
         <script>
             var arr = new Array();
-            var html = '';
 
             function addElement() {
                 var participantsName = document.getElementById('input').value;
@@ -51,11 +50,10 @@
             function shuffle() {
                 var currentIndex = arr.length,
                     temporaryValue, randomIndex, nextDiva;
-                html = '';
 
                 if( currentIndex>1){
                     var index = 0;
-                    html += '<h2>Bingo Bingo</h2><table style="width:100%">';
+                    addTable();
                     while (0 !== currentIndex) {
                         randomIndex = Math.floor(Math.random() * currentIndex);
                         currentIndex -= 1;
@@ -67,14 +65,11 @@
 
                     while (index < arr.length) {
                         nextDiva = arr[index + 2] && !arr[index + 3] ? arr[index + 1] + ', ' + arr[index + 2] : arr[index + 1];
-                        html += '<tr><td>' + arr[index] + '</td><td>' + nextDiva + '</td></tr>';
+                        addRow(arr[index], nextDiva)
                         index += 2;
                         if (index >= arr.length-1) break;
                     }
 
-                    html += '</table>'
-
-                    document.getElementById('resultlist').innerHTML = html;
                 }
             }
 
@@ -89,6 +84,30 @@
 
                 document.getElementById('participantlist').innerHTML=str;
             }
+
+            function addTable () {
+                const resultlist = document.getElementById("resultlist");
+                resultlist.innerHTML = '';
+                const newTitle = document.createElement("h2");
+                const newTable = document.createElement("table");
+                newTable.setAttribute("id", "resulttable");
+                const newTitleContent = document.createTextNode("Bingo Bingo");
+                newTitle.appendChild(newTitleContent);
+                resultlist.appendChild(newTitle);
+                resultlist.appendChild(newTable);
+            }
+
+            function addRow (firstParticipant, secondParticipants) {
+                const resulttable = document.getElementById("resulttable");
+                const newRow = resulttable.insertRow(-1);
+                const newFirstCell = newRow.insertCell(0);
+                const newSecondCell = newRow.insertCell(1);
+                const first = document.createTextNode(firstParticipant);
+                const second = document.createTextNode(secondParticipants);
+                newFirstCell.appendChild(first);
+                newSecondCell.appendChild(second);
+            }
+            
         </script>
     </body>
 </html>
