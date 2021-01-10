@@ -80,7 +80,7 @@
                     }
 
                     //same pairing? Redo!
-                    while (oldIndex < nameArray.length &&  oldNameArray.length > 0) {
+                    while (oldIndex < nameArray.length && oldNameArray) {
                         var indexFoundElement = oldNameArray.indexOf(nameArray[oldIndex]);
                         var doubleEntry = new Set(nameArray).size !== nameArray.length;
                         if(indexFoundElement > -1 && nameArray.length > 2 && !doubleEntry) {
